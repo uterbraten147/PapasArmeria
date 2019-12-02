@@ -8,7 +8,7 @@ public class GameMan : MonoBehaviour
 {
 	
 	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4;
-	public CinemachineVirtualCamera VCamMesa, VCamOptions;
+	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest;
 	float tiempo = 2.0f;
 
 
@@ -24,6 +24,7 @@ public class GameMan : MonoBehaviour
 
 		VCamMesa.Priority = 0;
 		VCamOptions.Priority= 10;
+		VCamArmaTest.Priority=0;
 		
     }
 
@@ -89,6 +90,20 @@ public class GameMan : MonoBehaviour
 		
 		StartCoroutine(esperarCamara(tiempo,4));
 	}
+	
+	public void probarArma()
+	{
+		VCamMesa.Priority = 0;
+		VCamOptions.Priority= 0;
+		VCamArmaTest.Priority=10;
+		
+		PanelArma1.SetActive(false);
+		PanelArma2.SetActive(false);
+		PanelArma3.SetActive(false);
+		PanelArma4.SetActive(false);
+		PanelOpciones.SetActive(false);
+	}
+	
 	
 	IEnumerator esperarCamara(float _tiempo , int _panel)
 	{
