@@ -7,40 +7,128 @@ using Cinemachine;
 public class GameMan : MonoBehaviour
 {
 	
-	public GameObject  PanelOpciones, MesaPanel;
+	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4;
 	public CinemachineVirtualCamera VCamMesa, VCamOptions;
+	float tiempo = 2.0f;
+
+
     // Start is called before the first frame update
     void Start()
 	{
-		PanelOpciones.SetActive(false);
-		MesaPanel.SetActive(true);
-		VCamMesa.Priority = 10;
-		VCamOptions.Priority= 0;
-        
+		PanelOpciones.SetActive(true);
+		
+		PanelArma1.SetActive(false);
+		PanelArma2.SetActive(false);
+		PanelArma3.SetActive(false);
+		PanelArma4.SetActive(false);
+
+		VCamMesa.Priority = 0;
+		VCamOptions.Priority= 10;
+		
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     
     
 	public void SettingsBTN()
 	{
-		PanelOpciones.SetActive(true);
-		MesaPanel.SetActive(false);
+	
 		VCamMesa.Priority = 0;
 		VCamOptions.Priority= 10;
+		PanelArma1.SetActive(false);
+		PanelArma2.SetActive(false);
+		PanelArma3.SetActive(false);
+		PanelArma4.SetActive(false);
+		
+		StartCoroutine(esperarCamara(tiempo,0));
 		
 	}
 	
-	public void MesaBTN()
+	
+	
+	public void ActPanelA1()
 	{
 		PanelOpciones.SetActive(false);
-		MesaPanel.SetActive(true);
+		
+		VCamMesa.Priority = 10;
+		VCamOptions.Priority= 0;	
+		
+		StartCoroutine(esperarCamara(tiempo,1));
+		
+	
+		
+		
+	}
+	
+	public void ActPanelA2()
+	{
+		PanelOpciones.SetActive(false);
+		
 		VCamMesa.Priority = 10;
 		VCamOptions.Priority= 0;
+		StartCoroutine(esperarCamara(tiempo,2));
+	}
+	
+	public void ActPanelA3()
+	{
+		PanelOpciones.SetActive(false);
+		
+		VCamMesa.Priority = 10;
+		VCamOptions.Priority= 0;
+		StartCoroutine(esperarCamara(tiempo,3));
+		
+		
+	}
+	
+	public void ActPanelA4()
+	{
+		PanelOpciones.SetActive(false);
+
+		VCamMesa.Priority = 10;
+		VCamOptions.Priority= 0;
+		
+		StartCoroutine(esperarCamara(tiempo,4));
+	}
+	
+	IEnumerator esperarCamara(float _tiempo , int _panel)
+	{
+		yield return new WaitForSeconds(_tiempo);
+		
+		
+		switch (_panel)
+		{
+		case 0:
+			PanelOpciones.SetActive(true);
+		
+			break;
+		case 1:
+			PanelArma1.SetActive(true);
+			PanelArma2.SetActive(false);
+			PanelArma3.SetActive(false);
+			PanelArma4.SetActive(false);
+			break;
+		case 2:
+			PanelArma1.SetActive(false);
+			PanelArma2.SetActive(true);
+			PanelArma3.SetActive(false);
+			PanelArma4.SetActive(false);
+			break;
+		case 3:
+			PanelArma1.SetActive(false);
+			PanelArma2.SetActive(false);
+			PanelArma3.SetActive(true);
+			PanelArma4.SetActive(false);
+			break;
+		case 4:
+			PanelArma1.SetActive(false);
+			PanelArma2.SetActive(false);
+			PanelArma3.SetActive(false);
+			PanelArma4.SetActive(true);
+			break;
+		}
+		
+		
+		
 		
 	}
 }
