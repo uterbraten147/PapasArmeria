@@ -7,15 +7,17 @@ using Cinemachine;
 public class GameMan : MonoBehaviour
 {
 	
-	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4;
-	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest;
+	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4, PanelTienda;
+	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest, VCamShop;
 	float tiempo = 2.0f;
 
 
     // Start is called before the first frame update
     void Start()
 	{
-		PanelOpciones.SetActive(true);
+		PanelTienda.SetActive(true);
+		
+		PanelOpciones.SetActive(false);
 		
 		PanelArma1.SetActive(false);
 		PanelArma2.SetActive(false);
@@ -23,8 +25,10 @@ public class GameMan : MonoBehaviour
 		PanelArma4.SetActive(false);
 
 		VCamMesa.Priority = 0;
-		VCamOptions.Priority= 10;
+		VCamOptions.Priority= 0;
 		VCamArmaTest.Priority=0;
+		VCamShop.Priority = 10;
+		
 		
     }
 
@@ -36,10 +40,13 @@ public class GameMan : MonoBehaviour
 	
 		VCamMesa.Priority = 0;
 		VCamOptions.Priority= 10;
+		VCamArmaTest.Priority=0;
+		VCamShop.Priority = 0;
 		PanelArma1.SetActive(false);
 		PanelArma2.SetActive(false);
 		PanelArma3.SetActive(false);
 		PanelArma4.SetActive(false);
+		PanelTienda.SetActive(false);
 		
 		StartCoroutine(esperarCamara(tiempo,0));
 		
@@ -55,10 +62,7 @@ public class GameMan : MonoBehaviour
 		VCamOptions.Priority= 0;	
 		
 		StartCoroutine(esperarCamara(tiempo,1));
-		
-	
-		
-		
+
 	}
 	
 	public void ActPanelA2()
@@ -96,12 +100,32 @@ public class GameMan : MonoBehaviour
 		VCamMesa.Priority = 0;
 		VCamOptions.Priority= 0;
 		VCamArmaTest.Priority=10;
+		VCamShop.Priority = 0;
 		
 		PanelArma1.SetActive(false);
 		PanelArma2.SetActive(false);
 		PanelArma3.SetActive(false);
 		PanelArma4.SetActive(false);
 		PanelOpciones.SetActive(false);
+	}
+	
+	
+	
+	
+	
+	public void verTienda()
+	{
+		VCamMesa.Priority = 0;
+		VCamOptions.Priority= 0;
+		VCamArmaTest.Priority=0;
+		VCamShop.Priority = 10;
+		
+		PanelArma1.SetActive(false);
+		PanelArma2.SetActive(false);
+		PanelArma3.SetActive(false);
+		PanelArma4.SetActive(false);
+		
+		StartCoroutine(esperarCamara(tiempo,5));
 	}
 	
 	
@@ -114,6 +138,8 @@ public class GameMan : MonoBehaviour
 		{
 		case 0:
 			PanelOpciones.SetActive(true);
+			
+			
 		
 			break;
 		case 1:
@@ -139,6 +165,12 @@ public class GameMan : MonoBehaviour
 			PanelArma2.SetActive(false);
 			PanelArma3.SetActive(false);
 			PanelArma4.SetActive(true);
+			break;
+			
+		case 5:
+		
+			PanelTienda.SetActive(true);
+		
 			break;
 		}
 		
