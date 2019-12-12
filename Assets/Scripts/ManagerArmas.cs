@@ -39,7 +39,7 @@ public class ManagerArmas : MonoBehaviour
 		caja1.SetActive(true);
 		caja3.SetActive(true);
 		botonAK1.SetActive(true);
-		botonAK3.SetActive(true);
+		botonAK2.SetActive(true);
 	}
 	
 	public void Boton1AK()

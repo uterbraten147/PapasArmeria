@@ -27,7 +27,7 @@ public class asdasd : MonoBehaviour
 	
 	IEnumerator Espera(Collider accesorio,Rigidbody rg)
 	{
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1.0f);
 		accesorio.transform.SetParent(FinalWeapon.transform,false);
 		accesorio.transform.position = new Vector3(posCargador.transform.position.x,posCargador.transform.position.y,posCargador.transform.position.z);
 		accesorio.transform.rotation = posCargador.transform.rotation;
@@ -35,7 +35,7 @@ public class asdasd : MonoBehaviour
 	}
 	IEnumerator EsperaMira(Collider acce,Rigidbody rgi)
 	{
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1.0f);
 		acce.transform.SetParent(FinalWeapon.transform,false);
 		acce.transform.rotation = posMira.transform.rotation;
 		acce.transform.position = new Vector3(posMira.transform.position.x,posMira.transform.position.y,posMira.transform.position.z);
