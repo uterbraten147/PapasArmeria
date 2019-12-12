@@ -8,6 +8,9 @@ TagManager:
   - Cargador
   - Mira
   - ArmaFinal
+  - pedidoB
+  - c
+  - V
   layers:
   - Default
   - TransparentFX

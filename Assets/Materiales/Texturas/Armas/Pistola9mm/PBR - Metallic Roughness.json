@@ -1,0 +1,30 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "Common Parameters": {
+                    "ao_intensity": 0.75,
+                    "emissive_intensity": 1,
+                    "horizonFade": 1.2999999523162842,
+                    "nbSamples": 256
+                },
+                "Parallax Occlusion Mapping": {
+                    "maxPOMSamples": 38,
+                    "minPOMSamples": 27,
+                    "pomStrength": 1.9299999475479126,
+                    "usePOM": true
+                }
+            },
+            "shader": "pbr-metal-rough",
+            "shaderInstance": "Main shader"
+        }
+    },
+    "texturesets": {
+        "Pistola9mm": {
+            "shader": "Main shader"
+        }
+    }
+}

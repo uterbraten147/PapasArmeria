@@ -7,8 +7,8 @@ using Cinemachine;
 public class GameMan : MonoBehaviour
 {
 	
-	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4, PanelTienda;
-	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest, VCamShop;
+	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4, PanelTienda, PanelLavadoras;
+	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest, VCamShop, VCamLavadoras;
 	float tiempo = 2.0f;
 
 
@@ -23,11 +23,14 @@ public class GameMan : MonoBehaviour
 		PanelArma2.SetActive(false);
 		PanelArma3.SetActive(false);
 		PanelArma4.SetActive(false);
+		
+		PanelLavadoras.SetActive(false);
 
 		VCamMesa.Priority = 0;
 		VCamOptions.Priority= 0;
 		VCamArmaTest.Priority=0;
 		VCamShop.Priority = 10;
+		VCamLavadoras.Priority= 0;
 		
 		
     }
@@ -42,6 +45,7 @@ public class GameMan : MonoBehaviour
 		VCamOptions.Priority= 10;
 		VCamArmaTest.Priority=0;
 		VCamShop.Priority = 0;
+		VCamLavadoras.Priority= 0;
 		PanelArma1.SetActive(false);
 		PanelArma2.SetActive(false);
 		PanelArma3.SetActive(false);
@@ -101,12 +105,31 @@ public class GameMan : MonoBehaviour
 		VCamOptions.Priority= 0;
 		VCamArmaTest.Priority=10;
 		VCamShop.Priority = 0;
+		VCamLavadoras.Priority= 0;
 		
 		PanelArma1.SetActive(false);
 		PanelArma2.SetActive(false);
 		PanelArma3.SetActive(false);
 		PanelArma4.SetActive(false);
 		PanelOpciones.SetActive(false);
+		PanelLavadoras.SetActive(false);
+	}
+	
+	public void LavadoraBTN()
+	{
+		VCamMesa.Priority = 0;
+		VCamOptions.Priority= 0;
+		VCamArmaTest.Priority=0;
+		VCamShop.Priority = 0;
+		VCamLavadoras.Priority= 10;
+		
+		PanelArma1.SetActive(false);
+		PanelArma2.SetActive(false);
+		PanelArma3.SetActive(false);
+		PanelArma4.SetActive(false);
+		PanelOpciones.SetActive(false);
+		
+		StartCoroutine(esperarCamara(tiempo,6));
 	}
 	
 	
@@ -170,7 +193,10 @@ public class GameMan : MonoBehaviour
 		case 5:
 		
 			PanelTienda.SetActive(true);
-		
+			break;
+		case 6:
+			
+			PanelLavadoras.SetActive(true);
 			break;
 		}
 		
