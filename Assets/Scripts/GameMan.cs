@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 
 public class GameMan : MonoBehaviour
 {
 	
-	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4, PanelTienda, PanelLavadoras;
+	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4, PanelTienda, PanelLavadoras, PanelProbar;
 	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest, VCamShop, VCamLavadoras;
-	float tiempo = 2.0f;
+	float tiempo = 2.0f, tiempoCarga;
+	Image BarraCarga ;
+	Text mensajeArma;
 
 
     // Start is called before the first frame update
@@ -32,8 +35,17 @@ public class GameMan : MonoBehaviour
 		VCamShop.Priority = 10;
 		VCamLavadoras.Priority= 0;
 		
+		mensajeArma.text = "";
 		
-    }
+		
+	}
+    
+	public void FuncProbarArma()
+	{
+		
+		StartCoroutine(probadorDeArma());
+		
+	}
 
    
     
@@ -202,6 +214,36 @@ public class GameMan : MonoBehaviour
 		
 		
 		
+		
+	}
+	
+	IEnumerator probadorDeArma(){
+		
+		float duration = 3f; 
+		
+		float totalTime = 0;
+		while(totalTime <= duration)
+		{
+			BarraCarga.fillAmount = totalTime / duration;
+			totalTime += Time.deltaTime;
+			var integer = (int)totalTime; /* choose how to quantize this */
+			/* convert integer to string and assign to text */
+			yield return null;
+		}
+		
+		yield return new WaitForSeconds(2.0f);
+		
+		int _probador= Random.Range(0 , 10);
+		
+		if(_probador > 5 )
+		{
+			mensajeArma.text="El arma funciona";
+			Debug.Log("El arma funciona");
+		}
+		else{
+			Debug.Log("no funciono");
+			mensajeArma.text="El arma NO funciona";
+		}
 		
 	}
 }
