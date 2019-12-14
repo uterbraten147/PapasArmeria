@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class GameMan : MonoBehaviour
 {
 	
-	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4, PanelTienda, PanelLavadoras, PanelProbar;
+	public GameObject  PanelOpciones, PanelArma1, PanelArma2, PanelArma3, PanelArma4,
+		PanelTienda, PanelLavadoras, PanelProbar, BTNEntregar, BTNTirar;
 	public CinemachineVirtualCamera VCamMesa, VCamOptions, VCamArmaTest, VCamShop, VCamLavadoras;
 	float tiempo = 2.0f, tiempoCarga;
-	Image BarraCarga ;
-	Text mensajeArma;
+	public 	Image BarraCarga ;
+	public  Text mensajeArma;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class GameMan : MonoBehaviour
 		PanelArma4.SetActive(false);
 		
 		PanelLavadoras.SetActive(false);
+		PanelProbar.SetActive(false);
 
 		VCamMesa.Priority = 0;
 		VCamOptions.Priority= 0;
@@ -36,6 +38,9 @@ public class GameMan : MonoBehaviour
 		VCamLavadoras.Priority= 0;
 		
 		mensajeArma.text = "";
+		
+		BTNEntregar.SetActive(false);
+		BTNTirar.SetActive(false);
 		
 		
 	}
@@ -125,6 +130,7 @@ public class GameMan : MonoBehaviour
 		PanelArma4.SetActive(false);
 		PanelOpciones.SetActive(false);
 		PanelLavadoras.SetActive(false);
+		StartCoroutine(esperarCamara(tiempo,7));
 	}
 	
 	public void LavadoraBTN()
@@ -144,6 +150,44 @@ public class GameMan : MonoBehaviour
 		StartCoroutine(esperarCamara(tiempo,6));
 	}
 	
+	public void DarArma()
+	{
+		VCamMesa.Priority = 0;
+		VCamOptions.Priority= 0;
+		VCamArmaTest.Priority=0;
+		VCamShop.Priority = 10;
+		
+		PanelProbar.SetActive(false);
+		
+		mensajeArma.text="";
+		
+		//Aumentar score del player
+		
+		BTNEntregar.SetActive(false);
+		BTNTirar.SetActive(false);
+		
+		StartCoroutine(esperarCamara(tiempo, 5));
+	}
+	
+	public void QuitarArma()
+	{
+		VCamMesa.Priority = 0;
+		VCamOptions.Priority= 0;
+		VCamArmaTest.Priority=0;
+		VCamShop.Priority = 10;
+		
+		PanelProbar.SetActive(false);
+		
+		mensajeArma.text="";
+		
+		//Decrementar score del player
+		
+		BTNEntregar.SetActive(false);
+		BTNTirar.SetActive(false);
+		
+		StartCoroutine(esperarCamara(tiempo, 5));
+	}
+	
 	
 	
 	
@@ -159,6 +203,11 @@ public class GameMan : MonoBehaviour
 		PanelArma2.SetActive(false);
 		PanelArma3.SetActive(false);
 		PanelArma4.SetActive(false);
+		PanelLavadoras.SetActive(false);
+		PanelProbar.SetActive(false);
+		
+		BTNEntregar.SetActive(false);
+		BTNTirar.SetActive(false);
 		
 		StartCoroutine(esperarCamara(tiempo,5));
 	}
@@ -210,6 +259,9 @@ public class GameMan : MonoBehaviour
 			
 			PanelLavadoras.SetActive(true);
 			break;
+		case 7:
+			PanelProbar.SetActive(true);
+			break;
 		}
 		
 		
@@ -231,18 +283,25 @@ public class GameMan : MonoBehaviour
 			yield return null;
 		}
 		
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(1.0f);
+		
+		BarraCarga.fillAmount = 0/duration;
 		
 		int _probador= Random.Range(0 , 10);
+		
+		Debug.Log(_probador);
 		
 		if(_probador > 5 )
 		{
 			mensajeArma.text="El arma funciona";
 			Debug.Log("El arma funciona");
+			BTNEntregar.SetActive(true);
+			
 		}
 		else{
 			Debug.Log("no funciono");
 			mensajeArma.text="El arma NO funciona";
+			BTNTirar.SetActive(true);
 		}
 		
 	}
